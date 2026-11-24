@@ -10,7 +10,7 @@
 //   X posts + followers  scrape.badger/twitter-tweets-scraper (as in Resonia Pulse's X step)
 // Prices below are set on the high side so the spending caps never cut a run short; every run's real
 // cost is read back from Apify (usageTotalUsd) and logged in sync_runs.apify_cost_usd.
-import { runActor, type ApifyPost } from "@/lib/apify";
+import { BACKFILL_TIMEOUT_SECS, runActor, type ApifyPost } from "@/lib/apify";
 import type { Brand } from "@/lib/brands";
 import { parseXDate, tweetText, type BadgerTweet } from "@/lib/x";
 
@@ -116,6 +116,7 @@ export async function fetchInstagram(
     },
     capUsd ?? limit * PRICE_USD.igPost * 1.5 + 0.01,
     limit + handles.length * 3, // pinned posts can come back outside the date window
+    since ? BACKFILL_TIMEOUT_SECS : undefined,
   );
   const items: ApifyPost[] = [];
   const returned = new Map<string, number>();
@@ -238,6 +239,7 @@ export async function fetchFacebook(
       },
       capUsd ? capUsd / pages.length : maxPosts * PRICE_USD.fbPost * 1.5 + 0.01,
       maxPosts,
+      since ? BACKFILL_TIMEOUT_SECS : undefined,
     );
     const own = run.items.filter((p) => !p.error);
     returned.set(page.slug, own.length);
@@ -322,6 +324,8 @@ export async function fetchX(
         max_results: maxPosts,
       },
       capUsd ? capUsd / pages.length : maxPosts * PRICE_USD.tweet * 1.5 + 0.01,
+      undefined,
+      since ? BACKFILL_TIMEOUT_SECS : undefined,
     );
     const own = run.items.filter(
       (t) => (t.username ?? "").toLowerCase() === page.handle!.toLowerCase(),

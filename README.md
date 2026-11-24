@@ -37,7 +37,7 @@ To add or remove a page, edit `brands.json` (`handle` is the Instagram or X user
 
 1. Create a Supabase project, paste `supabase/schema.sql` into its SQL editor and run it.
 2. Create a free Apify account and copy its API token.
-3. Locally: `npm install`, then set `APIFY_TOKEN`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `CRON_SECRET` and `DASHBOARD_PASSWORD` (e.g. in `.env.local`, then `export $(cat .env.local | xargs)`).
+3. Locally (Node 20.6 or newer): `npm install`, then copy `.env.example` to `.env.local` and fill in `APIFY_TOKEN`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `CRON_SECRET` and `DASHBOARD_PASSWORD`. The npm scripts read `.env.local` themselves.
 4. Check the actors answer: `npm run test:platforms` (a few cents). Every field should say `ok`.
 5. Estimate the backfill: `npm run backfill` (prints pages, limits and the worst-case cost against this month's Apify usage; spends nothing).
 6. Run it: `npm run backfill -- --go`. If the estimate is above the budget, split it across two billing cycles, e.g. `--go --only linkedin,x,instagram` now and `--go --only facebook` next cycle. `--dry` fetches without writing. Another start day: `npm run backfill -- 2026-06-01 --go`.

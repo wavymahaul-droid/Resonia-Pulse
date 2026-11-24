@@ -71,10 +71,11 @@ export async function runActor<T>(
   input: unknown,
   capUsd: number,
   maxItems?: number,
+  timeoutSecs = 280, // the daily sync stays inside Vercel's 300-second limit; the backfill passes more
 ): Promise<{ items: T[]; usageUsd: number; runId: string; status: string }> {
   const itemCap = maxItems ? `&maxItems=${Math.ceil(maxItems)}` : "";
   let run = (
-    await apify<{ data: Run }>(`/acts/${actor}/runs?timeout=280&waitForFinish=60&maxTotalChargeUsd=${capUsd.toFixed(3)}${itemCap}`, {
+    await apify<{ data: Run }>(`/acts/${actor}/runs?timeout=${timeoutSecs}&waitForFinish=60&maxTotalChargeUsd=${capUsd.toFixed(3)}${itemCap}`, {
       method: "POST",
       body: JSON.stringify(input),
     })
@@ -103,6 +104,9 @@ export async function runItems<T, I = unknown>(runId: string): Promise<{ items: 
 
 // A failed or timed-out run (or a network error) is retried once after RETRY_DELAY_MS.
 export const RETRY_DELAY_MS = 20_000;
+
+// A six-month backfill can take far longer than a daily fetch; it runs locally, not on Vercel.
+export const BACKFILL_TIMEOUT_SECS = 3600;
 
 // postedSince (YYYY-MM-DD): only posts from that day on are returned and charged (used by the
 // backfill; the daily sync leaves it out and takes each page's latest maxPosts).
@@ -133,6 +137,8 @@ async function fetchCompanyPostsOnce(
     ACTOR,
     { targetUrls: urls, maxPosts, includeReposts: false, ...(postedSince ? { postedLimitDate: postedSince } : {}) },
     cap,
+    undefined,
+    postedSince ? BACKFILL_TIMEOUT_SECS : undefined,
   );
   // With an explicit cap, a run that stops at the cap still returns what it fetched.
   if (run.status !== "SUCCEEDED" && !(capUsd && run.items.length)) {

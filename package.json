@@ -7,12 +7,12 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "sync": "tsx scripts/sync.ts",
-    "retag": "tsx scripts/retag.ts",
+    "sync": "tsx --env-file=.env.local scripts/sync.ts",
+    "retag": "tsx --env-file=.env.local scripts/retag.ts",
     "backfill-images": "tsx scripts/backfill-images.ts",
     "test": "tsx --test lib/*.test.ts",
-    "backfill": "tsx scripts/backfill.ts",
-    "test:platforms": "node scripts/test-platform-actors.mjs"
+    "backfill": "tsx --env-file=.env.local scripts/backfill.ts",
+    "test:platforms": "node --env-file=.env.local scripts/test-platform-actors.mjs"
   },
   "dependencies": {
     "@e965/xlsx": "0.20.3",
@@ -29,5 +29,8 @@
     "@types/react-dom": "^19.3.0",
     "tsx": "^4.23.15",
     "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=20.6"
   }
 }
