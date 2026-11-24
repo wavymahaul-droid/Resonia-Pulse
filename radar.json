@@ -1,0 +1,319 @@
+{
+  "_comment": "Industry Radar (/radar). Fetched by the 7am IST cron; free RSS feeds only. Each competitor in brands.json is also searched as \"<name> electric\". Feeds that fail or return nothing are skipped and shown as such on /radar (signed in).",
+  "keepDays": 60,
+  "googleNewsQueries": [
+    "electric truck India",
+    "electric SCV India",
+    "e-3W India",
+    "PM E-DRIVE",
+    "Parivartan scheme",
+    "MoRTH electric vehicle",
+    "NITI Aayog e-FAST",
+    "battery swapping policy India",
+    "state EV policy India",
+    "EV registrations Vahan",
+    "cement logistics electric truck",
+    "site:pib.gov.in electric vehicle",
+    "site:autocarpro.in electric commercial vehicle"
+  ],
+  "feeds": [
+    {
+      "name": "ETAuto",
+      "url": "https://auto.economictimes.indiatimes.com/rss/topstories",
+      "filter": true
+    },
+    {
+      "name": "EVreporter",
+      "url": "https://evreporter.com/feed/",
+      "filter": true
+    }
+  ],
+  "_feedsFilter": "Feeds with \"filter\": true keep only items that mention one of filterKeywords (PIB and trade media cover far more than EVs).",
+  "filterKeywords": [
+    "electric",
+    "EV",
+    "e-mobility",
+    "battery",
+    "charging",
+    "e-truck",
+    "e-bus",
+    "three-wheeler",
+    "3W",
+    "SCV",
+    "commercial vehicle",
+    "PM E-DRIVE",
+    "FAME",
+    "Vahan",
+    "e-FAST",
+    "tractor",
+    "swapping",
+    "MoRTH",
+    "NITI Aayog"
+  ],
+  "types": {
+    "Policy": [
+      "policy",
+      "scheme",
+      "subsidy",
+      "incentive",
+      "PM E-DRIVE",
+      "FAME",
+      "Parivartan",
+      "MoRTH",
+      "ministry",
+      "NITI Aayog",
+      "e-FAST",
+      "notification",
+      "guidelines",
+      "GST",
+      "budget",
+      "PLI",
+      "regulation",
+      "government",
+      "cabinet"
+    ],
+    "Market data": [
+      "registrations",
+      "Vahan",
+      "sales",
+      "units",
+      "market share",
+      "growth",
+      "data",
+      "volumes",
+      "FADA",
+      "SIAM",
+      "dispatches",
+      "year-on-year",
+      "YoY"
+    ],
+    "Charging & infra": [
+      "charging",
+      "charger",
+      "swapping",
+      "battery swap",
+      "infrastructure",
+      "grid",
+      "depot",
+      "hub"
+    ],
+    "Customer sectors": [
+      "cement",
+      "logistics",
+      "e-commerce",
+      "fleet",
+      "last-mile",
+      "last mile",
+      "mining",
+      "ports",
+      "FMCG",
+      "agriculture",
+      "farm",
+      "aggregator",
+      "3PL"
+    ]
+  },
+  "_types": "Competitor is set when a competitor from brands.json is named; otherwise the first type above with a keyword match, else Market data.",
+  "pages": {
+    "Truck": [
+      "truck",
+      "HCV",
+      "heavy commercial",
+      "heavy-duty",
+      "tipper",
+      "tractor-trailer",
+      "cement",
+      "mining",
+      "e-truck"
+    ],
+    "SCV & 3W": [
+      "SCV",
+      "small commercial",
+      "three-wheeler",
+      "3W",
+      "e-3W",
+      "e-rickshaw",
+      "last-mile",
+      "last mile",
+      "cargo",
+      "auto-rickshaw"
+    ],
+    "Tractor": ["tractor", "farm", "agricultur", "farmer"],
+    "Corporate": [
+      "policy",
+      "scheme",
+      "Murugappa",
+      "TI Clean Mobility",
+      "Montra",
+      "investment",
+      "funding",
+      "IPO",
+      "plant",
+      "subsidy"
+    ]
+  },
+  "_pages": "An item can affect several pages. Items that match no page keyword are tagged Corporate.",
+  "_feedsChanged": "7 Oct 2026: PIB's RSS returned HTTP 403 and Autocar Professional's /rss is not a feed, so both are read through Google News site searches instead (googleNewsQueries).",
+  "exclude": {
+    "_comment": "Passenger cars, two-wheelers and luxury EVs are left out unless the headline (or snippet) names Montra, a tracked competitor (brands.json) or one of unlessKeywords.",
+    "keywords": [
+      "car",
+      "cars",
+      "passenger vehicle",
+      "passenger vehicles",
+      "PV",
+      "SUV",
+      "hatchback",
+      "sedan",
+      "e-car",
+      "two-wheeler",
+      "2W",
+      "e-2W",
+      "scooter",
+      "motorcycle",
+      "bike",
+      "motorbike",
+      "luxury",
+      "Tesla",
+      "BYD",
+      "Mercedes",
+      "BMW",
+      "Audi",
+      "Porsche",
+      "Jaguar",
+      "Volvo XC",
+      "Kia",
+      "Hyundai",
+      "MG Windsor",
+      "Nexon",
+      "Punch EV",
+      "Creta",
+      "Ather",
+      "Ola Electric",
+      "iQube",
+      "Chetak",
+      "Vida",
+      "Ultraviolette"
+    ],
+    "unlessKeywords": [
+      "Montra",
+      "commercial",
+      "cargo",
+      "truck",
+      "bus",
+      "tractor",
+      "3W",
+      "e-3W",
+      "three-wheeler",
+      "e-rickshaw",
+      "auto-rickshaw",
+      "SCV",
+      "LCV",
+      "HCV",
+      "CV",
+      "e-CV"
+    ],
+    "alwaysKeywords": [
+      "scholarship",
+      "UPSC",
+      "current affairs",
+      "SSC exam",
+      "quiz"
+    ],
+    "_always": "Off-topic pages (exam prep, scholarships) that share a scheme's name are always left out."
+  },
+  "highRules": [
+    {
+      "label": "Heavy-duty, mining, construction, cement or logistics electric trucks",
+      "pages": ["Truck"],
+      "allOf": [
+        [
+          "truck",
+          "tipper",
+          "dumper",
+          "dump truck",
+          "HCV",
+          "e-truck",
+          "tractor-trailer",
+          "heavy-duty"
+        ],
+        [
+          "heavy-duty",
+          "mining",
+          "construction",
+          "cement",
+          "logistics",
+          "freight",
+          "haulage",
+          "tipper",
+          "dumper",
+          "port"
+        ],
+        ["electric", "EV", "e-truck", "battery", "zero-emission"]
+      ]
+    },
+    {
+      "label": "E-3W and small cargo EVs",
+      "pages": ["SCV & 3W"],
+      "allOf": [
+        [
+          "e-3W",
+          "three-wheeler",
+          "3W",
+          "e-rickshaw",
+          "auto-rickshaw",
+          "SCV",
+          "e-SCV",
+          "small commercial",
+          "mini truck",
+          "cargo",
+          "last-mile",
+          "last mile",
+          "L5"
+        ],
+        ["electric", "EV", "e-3W", "e-rickshaw", "e-SCV", "battery", "e-cargo"]
+      ]
+    },
+    {
+      "label": "Electric tractors and farm mechanisation",
+      "pages": ["Tractor"],
+      "allOf": [
+        [
+          "electric tractor",
+          "e-tractor",
+          "tractor",
+          "farm mechanisation",
+          "farm mechanization",
+          "agricultural machinery",
+          "farm machinery",
+          "agri machinery"
+        ]
+      ]
+    },
+    {
+      "label": "Schemes, subsidies and policy",
+      "pages": ["Truck", "SCV & 3W", "Tractor", "Corporate"],
+      "allOf": [
+        [
+          "scheme",
+          "subsidy",
+          "subsidies",
+          "policy",
+          "incentive",
+          "PM E-DRIVE",
+          "FAME",
+          "PLI",
+          "Parivartan",
+          "e-FAST",
+          "notification",
+          "guidelines",
+          "GST",
+          "budget",
+          "regulation",
+          "mandate"
+        ]
+      ]
+    }
+  ],
+  "_highRules": "An item is High when every keyword group of a rule matches (one keyword from each group); it is then tagged with that rule's pages too. Everything else is Medium."
+}

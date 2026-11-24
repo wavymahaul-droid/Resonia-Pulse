@@ -1,0 +1,79 @@
+{
+  "_comment": "LinkedIn post-search item that broke the linkedin_mentions insert on 10-12 Oct 2026 (harvestapi~linkedin-post-search). Tag positions are in code points, not UTF-16. Tagged people's profile ids and links removed.",
+  "type": "post",
+  "id": "7514512753328304128",
+  "linkedinUrl": "https://www.linkedin.com/posts/mobility-electrified_electricgoodsvehicles-electricmobility-evindia-activity-7514512753328304128-tvyl",
+  "content": "𝐄𝐮𝐥𝐞𝐫 𝐂𝐥𝐨𝐬𝐞𝐬 𝐈𝐧 𝐨𝐧 𝐓𝐚𝐭𝐚 𝐚𝐬 𝐄-𝐆𝐨𝐨𝐝𝐬 𝐂𝐚𝐫𝐫𝐢𝐞𝐫 𝐌𝐚𝐫𝐤𝐞𝐭 𝐆𝐫𝐨𝐰𝐬 𝟏𝟔𝟔% 𝐘𝐨𝐘\n\nIndia’s electric goods carrier 𝐦𝐚𝐫𝐤𝐞𝐭 𝐫𝐞𝐜𝐨𝐫𝐝𝐞𝐝 𝟑,𝟑𝟏𝟔 𝐮𝐧𝐢𝐭𝐬 𝐢𝐧 𝐒𝐞𝐩𝐭𝐞𝐦𝐛𝐞𝐫 𝟐𝟎𝟐𝟔, down 𝟏𝟑.𝟏% 𝐌𝐨𝐌. However, the decline was largely driven by the sharp correction in Sany’s August sales spike.\n\nBeneath the monthly dip, competition is intensifying. 𝐓𝐚𝐭𝐚 𝐜𝐨𝐧𝐭𝐢𝐧𝐮𝐞𝐝 𝐭𝐨 𝐥𝐞𝐚𝐝 𝐰𝐢𝐭𝐡 𝟏,𝟐𝟔𝟑 𝐮𝐧𝐢𝐭𝐬 and a 𝟑𝟖.𝟏% 𝐦𝐚𝐫𝐤𝐞𝐭 𝐬𝐡𝐚𝐫𝐞, but Euler Motors is rapidly closing the gap.\n\nEuler 𝐫𝐞𝐜𝐨𝐫𝐝𝐞𝐝 𝟏,𝟎𝟔𝟕 𝐮𝐧𝐢𝐭𝐬, 𝐮𝐩 𝟐𝟎.𝟕% 𝐌𝐨𝐌, narrowing Tata’s lead from 536 units in August to just 196 units in September. Its market share has also climbed from 4.9% in September 2025 to 32.2%.\n\nMeanwhile, Mahindra and Switch each grew around 28% MoM, signalling broader competitive momentum across the segment.\n\n𝐖𝐢𝐭𝐡 𝐄𝐮𝐥𝐞𝐫 𝐜𝐥𝐨𝐬𝐢𝐧𝐠 𝐢𝐧 𝐨𝐧 𝐓𝐚𝐭𝐚 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐦𝐚𝐫𝐤𝐞𝐭 𝐦𝐨𝐫𝐞 𝐭𝐡𝐚𝐧 𝐝𝐨𝐮𝐛𝐥𝐢𝐧𝐠 𝐘𝐨𝐘, 𝐜𝐨𝐮𝐥𝐝 𝐰𝐞 𝐬𝐞𝐞 𝐚 𝐜𝐡𝐚𝐧𝐠𝐞 𝐢𝐧 𝐥𝐞𝐚𝐝𝐞𝐫𝐬𝐡𝐢𝐩 𝐢𝐧 𝐭𝐡𝐞 𝐜𝐨𝐦𝐢𝐧𝐠 𝐦𝐨𝐧𝐭𝐡𝐬?\n\nGirish Wagh | Saurav Kumar | Tata Motors | Mahindra Last Mile Mobility | Suman Mishra | Switch Mobility | Ganesh Mani S | Resonia SCV | SAJU NAIR |\n\nSource: VAHAN\n#ElectricGoodsVehicles #ElectricMobility #EVIndia #EulerMotors #TataMotors #Mahindra #SwitchMobility #CommercialEVs #MobilityElectrified #IndiaEVMarket",
+  "contentAttributes": [
+    {
+      "start": 379,
+      "length": 12,
+      "type": "COMPANY_NAME"
+    },
+    {
+      "start": 861,
+      "length": 11,
+      "type": "PROFILE_MENTION",
+      "profile": {}
+    },
+    {
+      "start": 875,
+      "length": 12,
+      "type": "PROFILE_MENTION",
+      "profile": {}
+    },
+    {
+      "start": 890,
+      "length": 11,
+      "type": "COMPANY_NAME"
+    },
+    {
+      "start": 904,
+      "length": 27,
+      "type": "COMPANY_NAME"
+    },
+    {
+      "start": 934,
+      "length": 12,
+      "type": "PROFILE_MENTION",
+      "profile": {}
+    },
+    {
+      "start": 949,
+      "length": 15,
+      "type": "COMPANY_NAME"
+    },
+    {
+      "start": 967,
+      "length": 13,
+      "type": "PROFILE_MENTION",
+      "profile": {}
+    },
+    {
+      "start": 983,
+      "length": 19,
+      "type": "COMPANY_NAME"
+    },
+    {
+      "start": 1005,
+      "length": 9,
+      "type": "PROFILE_MENTION",
+      "profile": {}
+    }
+  ],
+  "author": {
+    "type": "company",
+    "name": "Mobility Electrified",
+    "universalName": "mobility-electrified",
+    "linkedinUrl": "https://www.linkedin.com/showcase/mobility-electrified/posts",
+    "info": "668 followers"
+  },
+  "postedAt": {
+    "date": "2026-10-10T02:30:53.289Z"
+  },
+  "engagement": {
+    "likes": 0,
+    "comments": 0,
+    "shares": 0
+  }
+}

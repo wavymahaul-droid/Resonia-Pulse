@@ -1,0 +1,7 @@
+{
+  "_how_to_use": "Optional monthly new-follower target per Resonia page (brands.json slug). Replace null with a number to show 'on track' or 'behind' in the Followers section; leave null for no target.",
+  "resonia-li": null,
+  "resonia-ig": null,
+  "resonia-fb": null,
+  "all": null
+}

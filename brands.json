@@ -1,0 +1,15 @@
+[
+  {"slug": "resonia-li", "name": "Resonia \u00b7 LinkedIn", "linkedin_url": "https://www.linkedin.com/company/resonia/", "segment": "linkedin", "is_montra": true, "max_posts": 5, "sync_every_days": 1},
+  {"slug": "resonia-ig", "name": "Resonia \u00b7 Instagram", "linkedin_url": "https://www.instagram.com/resonialimited/", "handle": "resonialimited", "segment": "instagram", "is_montra": true, "max_posts": 5, "sync_every_days": 1},
+  {"slug": "resonia-fb", "name": "Resonia \u00b7 Facebook", "linkedin_url": "https://www.facebook.com/profile.php?id=61575138148057", "segment": "facebook", "is_montra": true, "max_posts": 5, "sync_every_days": 1},
+  {"slug": "indigrid-li", "name": "IndiGrid \u00b7 LinkedIn", "linkedin_url": "https://www.linkedin.com/company/indigrid/", "segment": "linkedin", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "indigrid-ig", "name": "IndiGrid \u00b7 Instagram", "linkedin_url": "https://www.instagram.com/indigrid.in/", "handle": "indigrid.in", "segment": "instagram", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "indigrid-x", "name": "IndiGrid \u00b7 X", "linkedin_url": "https://x.com/indigrid_in", "handle": "indigrid_in", "segment": "x", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "aesl-li", "name": "Adani Energy Solutions \u00b7 LinkedIn", "linkedin_url": "https://www.linkedin.com/company/adani-energy-solutions-ltd/", "segment": "linkedin", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "aesl-ig", "name": "Adani Energy Solutions \u00b7 Instagram", "linkedin_url": "https://www.instagram.com/adanienergysolutions/", "handle": "adanienergysolutions", "segment": "instagram", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "aesl-x", "name": "Adani Energy Solutions \u00b7 X", "linkedin_url": "https://x.com/adanienergysol", "handle": "adanienergysol", "segment": "x", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "powergrid-li", "name": "POWERGRID \u00b7 LinkedIn", "linkedin_url": "https://www.linkedin.com/company/powergrid/", "segment": "linkedin", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "powergrid-ig", "name": "POWERGRID \u00b7 Instagram", "linkedin_url": "https://www.instagram.com/pgcilindia/", "handle": "pgcilindia", "segment": "instagram", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "powergrid-fb", "name": "POWERGRID \u00b7 Facebook", "linkedin_url": "https://www.facebook.com/pgcilindia", "segment": "facebook", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "powergrid-x", "name": "POWERGRID \u00b7 X", "linkedin_url": "https://x.com/pgcilindia", "handle": "pgcilindia", "segment": "x", "is_montra": false, "max_posts": 4, "sync_every_days": 1}
+]

@@ -1,0 +1,26 @@
+{
+  "_help": [
+    "Settings for the Highlights card on the Overview. Edit freely; the dashboard picks changes up on the next deploy.",
+    "launchKeywords: competitor posts naming any of these are called out. Matching ignores case and works on whole words or phrases, so 'won' does not match inside 'wonderful'. End a keyword with * to match any word starting with it: 'commission*' matches commission, commissioned, commissioning.",
+    "volumeMultiple: a page posting this many times (or more) its usual weekly number of posts in the last 7 days of the range.",
+    "postMultiple: a post getting this many times (or more) its page's average likes + comments. minLikesComments stops tiny numbers (3 vs 1) from counting.",
+    "followerJumpPct: a page gaining this many per cent (or more) followers in a week."
+  ],
+  "launchKeywords": [
+    "commission*",
+    "energi*",
+    "awarded",
+    "letter of intent",
+    "acquire*",
+    "acquisition",
+    "wins",
+    "won",
+    "secured",
+    "bags",
+    "inaugurat*"
+  ],
+  "volumeMultiple": 2,
+  "postMultiple": 3,
+  "minLikesComments": 10,
+  "followerJumpPct": 1
+}

@@ -1,0 +1,108 @@
+{
+  "_help": [
+    "Keyword rules for comment sentiment. Edit freely, then run `npm run retag-comments` to re-tag stored comments.",
+    "Matching ignores case and works on whole words or phrases, so 'issue' does not match inside 'tissue'. End a keyword with * to match any word starting with it: 'complain*' matches complain, complaint, complaints.",
+    "Rules are checked in the order listed: the first sentiment that matches wins. Negative comes first so a real complaint is never hidden as Spam or Careers.",
+    "unless: if any of these words or phrases is in the comment, the rule is skipped ('great job' is praise, not a job seeker; an owner asking about servicing is a question, not a lead).",
+    "links_except: any link to a site not in this list makes the comment match (used for Spam; subdomains count, so dealers.montraelectric.com is allowed).",
+    "question_mark: true also counts any comment containing '?' as that sentiment.",
+    "Comments that match nothing get the fallback sentiment.",
+    "needs_response lists the sentiments that get the 'Needs response' flag. Careers and Spam are never flagged, and neither are comments written by the Montra page itself.",
+    "X mentions use the same rules, with links and leading @handles removed first. Media and brand-page tweets are labelled 'Media mention' and flagged only when Negative (see lib/x.ts)."
+  ],
+  "fallback": "Neutral",
+  "needs_response": ["Negative", "Lead", "Question"],
+  "rules": [
+    {
+      "sentiment": "Negative",
+      "keywords": [
+        "complain*", "problem*", "issue*", "help", "please help", "refund*", "not working", "not responding",
+        "no response", "no reply", "no one is responding", "nobody", "worst", "pathetic", "poor service",
+        "bad service", "bad experience", "disappointed", "disappointing", "unhappy", "cheated", "fraud",
+        "scam", "faulty", "defect*", "breakdown", "broke down", "stuck", "delay*", "waiting since",
+        "still waiting", "please contact", "contact me", "call me", "escalat*", "consumer court", "not good",
+        "not happy", "not satisfied", "dont buy", "don't buy", "don’t buy", "do not buy",
+        "never buy", "not able to", "waiting for your action", "waiting for ur action", "waiting for u r action",
+        "waiting for action", "waiting for your reply", "waiting for your response", "charging problem",
+        "charging issue", "battery problem", "battery issue", "khet mein band", "khet me band", "khet mai band",
+        "खेत में बंद", "sunwai nahi", "sunwayi nahi", "sunvai nahi", "koi sunwai nahi",
+        "koi response nahi", "koi reply nahi", "koi jawab nahi", "call nahi", "phone nahi", "call nahi uthate",
+        "phone nahi uthate", "service kharab", "kharab", "kharaab", "bekar", "bakwas", "band ho gaya",
+        "band ho gayi", "band pada", "chal nahi rahi", "chal nahi raha", "chalti nahi", "pareshan", "dhokha",
+        "शिकायत", "समस्या", "दिक्कत", "खराब", "ख़राब", "बेकार", "परेशान", "बंद हो गया", "बंद हो गई", "रिफंड",
+        "सुनवाई नहीं", "कोई जवाब नहीं", "कोई सुनवाई नहीं", "मदद", "धोखा"
+      ]
+    },
+    {
+      "sentiment": "Spam",
+      "keywords": [
+        "whatsapp", "wa.me", "chat.whatsapp.com", "whatsapp group", "telegram", "t.me", "earn", "earn money",
+        "earn daily", "earning from home", "work from home", "make money", "crypto", "bitcoin", "forex",
+        "trading signal*", "investment plan*", "investment opportunit*", "invest now", "guaranteed return*",
+        "click link", "click the link", "click here", "link in bio", "dm me", "inbox me", "message me",
+        "follow me", "follow my page", "subscribe my channel", "check my profile", "promote your",
+        "promotion service*"
+      ],
+      "unless": [
+        "price", "pricing", "kitne", "dealer*", "interested", "intrested", "details", "quotation", "brochure",
+        "test drive", "booking"
+      ],
+      "links_except": [
+        "linkedin.com", "lnkd.in", "montraelectric.com", "tiindia.com", "murugappa.com", "montra.in"
+      ]
+    },
+    {
+      "sentiment": "Careers",
+      "keywords": [
+        "job", "jobs", "sales job", "job opening*", "any opening*", "openings", "vacanc*", "hiring",
+        "are you hiring", "resume", "cv", "naukri", "internship*", "intern", "fresher", "applied for",
+        "how to apply", "career opportunit*", "job opportunit*", "any requirement", "years experience",
+        "years of experience", "years working", "work experience", "working experience", "looking for a job",
+        "give me a chance", "give me an opportunity", "give me opportunit*", "job chahiye", "naukri chahiye", "नौकरी",
+        "रोजगार", "भर्ती"
+      ],
+      "unless": [
+        "good job", "great job", "nice job", "well done", "job well done", "awesome job", "excellent job",
+        "fantastic job", "amazing job", "brilliant job", "superb job", "wonderful job", "keep up the good job",
+        "good work"
+      ]
+    },
+    {
+      "sentiment": "Lead",
+      "keywords": [
+        "interested", "intrested", "intersted", "i interested", "price", "prices", "pricing", "on road price",
+        "on-road price", "cost", "quotation", "quote", "brochure", "details", "more info", "more information",
+        "contact number", "mobile number", "phone number", "whatsapp number", "dealer*", "distributor*",
+        "franchise", "test drive", "demo", "booking", "book one", "buy", "purchase", "emi", "finance option*",
+        "availability", "available", "kitne ka", "kitne ki", "kitna price", "price kitna", "kitna paisa", "kitne paise",
+        "kitne rupaye", "kahan milega", "kaha milega", "chahiye", "kisan", "kisaan", "farmer price", "subsidy", "subsidi",
+        "loan", "dealer near me", "nearest dealer", "किसान", "सब्सिडी", "लोन",
+        "lena hai", "kharidna", "कीमत", "कितने का", "कितने की", "डीलर", "संपर्क", "जानकारी", "खरीदना",
+        "चाहिए", "कहाँ मिलेगा", "कहां मिलेगा"
+      ],
+      "unless": ["purchased", "i bought", "we bought", "my vehicle", "our vehicle", "servicing", "serviced"]
+    },
+    {
+      "sentiment": "Question",
+      "question_mark": true,
+      "keywords": [
+        "how to", "how much", "how can", "how do", "what is", "when will", "when is", "where is", "where can",
+        "which model", "would like to know", "want to know", "who is", "is it", "is there", "can i", "can you",
+        "could you", "do you", "does it", "will it", "kya", "kaise", "kab", "kahan", "kaha", "kyun", "kyu",
+        "kaun", "kitna", "mileage", "kitne ghante", "kitna chalega", "range", "backup", "charging time",
+        "क्या", "कैसे", "कब", "कहाँ", "कहां", "क्यों", "कौन", "कितना", "माइलेज", "कितने घंटे"
+      ]
+    },
+    {
+      "sentiment": "Positive",
+      "keywords": [
+        "congrat*", "congo", "great", "awesome", "amazing", "excellent", "superb", "fantastic", "proud",
+        "well done", "good job", "best wishes", "all the best", "kudos", "inspiring", "inspiration",
+        "impressive", "love", "loved", "nice", "wishes", "wishing", "prosperity", "thanks", "thank you",
+        "good", "wonderful", "brilliant", "bravo", "outstanding", "keep it up", "badhai", "shandar",
+        "zabardast", "bahut accha", "bahut badhiya", "badhiya", "बधाई", "शानदार", "बहुत अच्छा", "बढ़िया",
+        "शुभकामनाएं", "शुभकामनाएँ", "👏*", "🎉*", "👍*", "❤*", "🔥*", "💐*", "🙌*"
+      ]
+    }
+  ]
+}
