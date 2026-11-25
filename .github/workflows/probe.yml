@@ -1,0 +1,20 @@
+# Check candidate Instagram usernames and Facebook pages before adding them to brands.json (a few cents).
+name: 0. Probe pages
+on:
+  workflow_dispatch:
+    inputs:
+      ig: { description: "Instagram usernames, comma-separated", type: string, default: "" }
+      fb: { description: "Facebook page URLs, comma-separated", type: string, default: "" }
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: node scripts/probe-pages.mjs
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          IG: ${{ inputs.ig }}
+          FB: ${{ inputs.fb }}
