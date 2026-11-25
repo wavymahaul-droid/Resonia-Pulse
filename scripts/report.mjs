@@ -114,7 +114,9 @@ if (process.env.PAGES) {
     });
     const activeDays = new Set(list.map((r) => r.date)).size;
     const dates = list.map((r) => r.date).sort();
-    return { id: b.id, name: b.name, platform: b.segment, url: b.linkedin_url, followers: latestF[b.id]?.followers ?? null, followers_date: latestF[b.id]?.date ?? null, posts: list.length, first: dates[0] ?? null, last: dates.at(-1) ?? null, activeDays, median: median(list.map((r) => r.interactions)), bySlot, byDay };
+    const avg = (k) => (list.length ? +(list.reduce((t, r) => t + r[k], 0) / list.length).toFixed(1) : null);
+    const fm = {}; for (const r of list) fm[r.format] = (fm[r.format] || 0) + 1;
+    return { avgLikes: avg('likes'), avgComments: avg('comments'), avgReposts: avg('reposts'), avgInt: avg('interactions'), formats: fm, id: b.id, name: b.name, platform: b.segment, url: b.linkedin_url, followers: latestF[b.id]?.followers ?? null, followers_date: latestF[b.id]?.date ?? null, posts: list.length, first: dates[0] ?? null, last: dates.at(-1) ?? null, activeDays, median: median(list.map((r) => r.interactions)), bySlot, byDay };
   });
 }
 if (process.env.TOPICAL) {
