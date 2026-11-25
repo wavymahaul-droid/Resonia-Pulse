@@ -20,7 +20,8 @@ async function sb(path) {
     if (rows.length < 1000) return out;
   }
 }
-const brands = await sb("brands?select=id,name,segment");
+const brands = await sb("brands?select=id,name,segment,linkedin_url");
+const fol = await sb("follower_snapshots?select=brand_id,date,followers&order=date.desc");
 const posts = await sb(`posts?select=post_url,brand_id,posted_at,media_type,theme,text&posted_at=gte.${SINCE}`);
 const snaps = await sb("post_snapshots?select=post_url,date,likes,comments,reposts&order=date.desc");
 const latest = new Map();
@@ -40,6 +41,8 @@ const rows = posts.map((p) => {
     reposts: s.reposts ?? 0,
     interactions: (s.likes ?? 0) + (s.comments ?? 0) + (s.reposts ?? 0),
     url: p.post_url,
+    slug: p.brand_id,
+    ist: new Date(new Date(p.posted_at).getTime() + 5.5 * 3600e3),
     text: (p.text || "").replace(/\s+/g, " ").trim(),
     tags: [...new Set(((p.text || "").match(/#[\p{L}\p{N}_]+/gu) || []).map((t) => t.toLowerCase()))],
   };
@@ -57,7 +60,7 @@ for (const [k, list] of Object.entries(groups)) {
   list.sort((a, b) => b.interactions - a.interactions);
   const med = median(list.map((x) => x.interactions));
   for (const r of list.slice(0, 8))
-    report.top.push({ ...r, text: r.text.slice(0, 220), tags: undefined, page_median: med, x_median: med ? +(r.interactions / med).toFixed(1) : null });
+    report.top.push({ ...r, ist: undefined, text: r.text.slice(0, 220), tags: undefined, page_median: med, x_median: med ? +(r.interactions / med).toFixed(1) : null });
 }
 const tagStats = {};
 for (const r of rows)
@@ -93,6 +96,33 @@ if (process.env.SEARCH) {
     .filter((r) => re.test(r.text))
     .sort((a, b) => a.brand.localeCompare(b.brand) || a.date.localeCompare(b.date))
     .map((r) => ({ brand: r.brand, platform: r.platform, date: r.date, format: r.format, interactions: r.interactions, url: r.url, match: (r.text.match(re) || [""])[0], text: r.text.slice(0, 140) }));
+}
+if (process.env.PAGES) {
+  const latestF = {};
+  for (const f of fol) if (!(f.brand_id in latestF)) latestF[f.brand_id] = f;
+  const slots = [[0, 9, "Before 9 am"], [9, 12, "9 am to 12 pm"], [12, 15, "12 to 3 pm"], [15, 18, "3 to 6 pm"], [18, 21, "6 to 9 pm"], [21, 24, "After 9 pm"]];
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  report.pages = brands.map((b) => {
+    const list = rows.filter((r) => r.slug === b.id);
+    const bySlot = slots.map(([a, z, label]) => {
+      const xs = list.filter((r) => r.ist.getUTCHours() >= a && r.ist.getUTCHours() < z).map((r) => r.interactions);
+      return { label, posts: xs.length, median: median(xs) };
+    });
+    const byDay = days.map((d, i) => {
+      const xs = list.filter((r) => r.ist.getUTCDay() === i).map((r) => r.interactions);
+      return { label: d, posts: xs.length, median: median(xs) };
+    });
+    const activeDays = new Set(list.map((r) => r.date)).size;
+    const dates = list.map((r) => r.date).sort();
+    return { id: b.id, name: b.name, platform: b.segment, url: b.linkedin_url, followers: latestF[b.id]?.followers ?? null, followers_date: latestF[b.id]?.date ?? null, posts: list.length, first: dates[0] ?? null, last: dates.at(-1) ?? null, activeDays, median: median(list.map((r) => r.interactions)), bySlot, byDay };
+  });
+}
+if (process.env.TOPICAL) {
+  const re = new RegExp(process.env.TOPICAL, "i");
+  report.topical = rows
+    .filter((r) => re.test(r.text))
+    .sort((a, b) => a.brand.localeCompare(b.brand) || a.date.localeCompare(b.date))
+    .map((r) => ({ brand: r.brand, platform: r.platform, date: r.date, format: r.format, interactions: r.interactions, url: r.url, match: [...new Set((r.text.match(new RegExp(process.env.TOPICAL, "gi")) || []).map((m) => m.toLowerCase()))].join(", "), text: r.text.slice(0, 120) }));
 }
 console.log("REPORT_JSON_START");
 console.log(JSON.stringify(report));

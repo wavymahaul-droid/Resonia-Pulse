@@ -20,6 +20,14 @@ on:
         description: "Regex to search captions for"
         type: string
         default: ""
+      pages:
+        description: "Include page stats (followers, frequency, best times)"
+        type: boolean
+        default: false
+      topical:
+        description: "Regex for topical days and festivals"
+        type: string
+        default: ""
 jobs:
   report:
     runs-on: ubuntu-latest
@@ -37,3 +45,5 @@ jobs:
           THEME: ${{ inputs.theme }}
           PLATFORM: ${{ inputs.platform }}
           SEARCH: ${{ inputs.search }}
+          PAGES: ${{ inputs.pages && '1' || '' }}
+          TOPICAL: ${{ inputs.topical }}
