@@ -47,7 +47,8 @@ const PER_PAGE_EXTRA: Record<Segment, number> = {
   x: 0,
 };
 
-const pages = BRANDS.filter((b) => ONLY.includes(b.segment));
+const SLUGS = args.includes("--pages") ? args[args.indexOf("--pages") + 1].split(",") : null;
+const pages = BRANDS.filter((b) => ONLY.includes(b.segment) && (!SLUGS || SLUGS.includes(b.slug)));
 const caps = {} as Record<Segment, number>;
 for (const p of PLATFORMS) {
   const n = pages.filter((b) => b.segment === p).length;

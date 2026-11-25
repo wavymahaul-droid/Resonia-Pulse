@@ -10,5 +10,6 @@
   {"slug": "aesl-fb", "name": "Adani Energy Solutions · Facebook", "linkedin_url": "https://www.facebook.com/AdaniOnline", "segment": "facebook", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
   {"slug": "powergrid-li", "name": "POWERGRID · LinkedIn", "linkedin_url": "https://www.linkedin.com/company/powergrid/", "segment": "linkedin", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
   {"slug": "powergrid-fb", "name": "POWERGRID · Facebook", "linkedin_url": "https://www.facebook.com/pgcilindia", "segment": "facebook", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
+  {"slug": "powergrid-ig", "name": "POWERGRID · Instagram", "linkedin_url": "https://www.instagram.com/pgcilindia/", "handle": "pgcilindia", "segment": "instagram", "is_montra": false, "max_posts": 4, "sync_every_days": 1},
   {"slug": "powergrid-x", "name": "POWERGRID · X", "linkedin_url": "https://x.com/pgcilindia", "handle": "pgcilindia", "segment": "x", "is_montra": false, "max_posts": 4, "sync_every_days": 1}
 ]

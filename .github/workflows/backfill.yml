@@ -15,6 +15,10 @@ on:
         description: "Platforms, comma-separated, no spaces (blank = all four)"
         type: string
         default: ""
+      pages:
+        description: "Only these page slugs from brands.json, comma-separated (blank = all)"
+        type: string
+        default: ""
       since:
         description: "First day to collect (YYYY-MM-DD)"
         type: string
@@ -35,6 +39,7 @@ jobs:
           ARGS="${{ inputs.since }}"
           if [ "${{ inputs.go }}" = "true" ]; then ARGS="$ARGS --go"; fi
           if [ -n "${{ inputs.platforms }}" ]; then ARGS="$ARGS --only ${{ inputs.platforms }}"; fi
+          if [ -n "${{ inputs.pages }}" ]; then ARGS="$ARGS --pages ${{ inputs.pages }}"; fi
           npx tsx scripts/backfill.ts $ARGS
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
