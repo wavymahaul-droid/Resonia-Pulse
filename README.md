@@ -4,14 +4,16 @@ Content tracker for Resonia and three transmission peers (IndiGrid, Adani Energy
 
 ## Pages
 
-`brands.json` lists 13 pages. A page is one brand on one platform, and its `segment` is the platform, so the segment chips on the dashboard filter by platform.
+`brands.json` lists 12 pages, the ones agreed for the pitch. A page is one brand on one platform, and its `segment` is the platform, so the segment chips on the dashboard filter by platform.
 
 | Brand | LinkedIn | Instagram | Facebook | X |
 | --- | --- | --- | --- | --- |
-| Resonia | resonia | @resonialimited | profile 61575138148057 | not tracked: @Resonialimited shows "Account suspended" |
-| IndiGrid | indigrid | @indigrid.in (small account, not linked from indigrid.co.in: confirm it is official) | none linked from its website | @indigrid_in |
-| Adani Energy Solutions | adani-energy-solutions-ltd | @adanienergysolutions | not tracked: its website links the Adani group page | @adanienergysol |
-| POWERGRID | powergrid | @pgcilindia | pgcilindia | @pgcilindia |
+| Resonia | resonia | @resonialimited | profile 61575138148057 | not in the agreed list (shows "Account suspended") |
+| POWERGRID | powergrid | not in the agreed list | pgcilindia | @pgcilindia |
+| IndiGrid | indigrid | not in the agreed list | not in the agreed list | @indigrid_in |
+| Adani Energy Solutions | adani-energy-solutions-ltd | @adanienergysolutions | AdaniOnline (the Adani Group page, which also posts for other Adani companies) | @adanienergysol |
+
+YouTube is also in the agreed list (Resonia @ResoniaLimited, POWERGRID /c/pgcilind, Adani /user/AdaniOnline) but is not scraped by Resonia Pulse: each channel's latest 15 videos are public in its RSS feed, and the research doc reads them from there.
 
 To add or remove a page, edit `brands.json` (`handle` is the Instagram or X username without the @).
 
