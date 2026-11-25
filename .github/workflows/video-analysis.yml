@@ -1,0 +1,49 @@
+# Actions tab > "4. Video analysis" > Run workflow.
+# Gemini watches each brand's video posts since the chosen date and describes the treatment.
+# Results are saved as the run's "video-analysis" artifact (JSON). No video file is kept.
+# Needs the GEMINI_API_KEY, SUPABASE_URL and SUPABASE_SERVICE_KEY secrets (APIFY_TOKEN optional).
+name: 4. Video analysis
+on:
+  workflow_dispatch:
+    inputs:
+      since:
+        description: "First day (YYYY-MM-DD)"
+        type: string
+        default: "2026-05-24"
+      per_brand:
+        description: "Max distinct videos per competitor"
+        type: string
+        default: "12"
+      resonia_max:
+        description: "Max distinct Resonia videos"
+        type: string
+        default: "25"
+jobs:
+  analyse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install ffmpeg and yt-dlp
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python3 -m pip install --quiet --upgrade --break-system-packages yt-dlp
+      - run: node scripts/video-analysis.mjs
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          SINCE: ${{ inputs.since }}
+          PER_BRAND: ${{ inputs.per_brand }}
+          RESONIA_MAX: ${{ inputs.resonia_max }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: video-analysis
+          path: video-analysis.json
+          if-no-files-found: warn
