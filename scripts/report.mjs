@@ -81,6 +81,12 @@ for (const t of wanted)
     .filter((r) => r.tags.includes(t))
     .sort((a, b) => a.date.localeCompare(b.date))
     .map((r) => ({ brand: r.brand, platform: r.platform, date: r.date, format: r.format, interactions: r.interactions, url: r.url, text: r.text.slice(0, 160) }));
+const theme = process.env.THEME;
+if (theme)
+  report.theme = rows
+    .filter((r) => (r.theme || "Other") === theme && (!process.env.PLATFORM || r.platform === process.env.PLATFORM))
+    .sort((a, b) => a.brand.localeCompare(b.brand) || a.date.localeCompare(b.date))
+    .map((r) => ({ brand: r.brand, platform: r.platform, date: r.date, format: r.format, interactions: r.interactions, url: r.url, text: r.text.slice(0, 200) }));
 console.log("REPORT_JSON_START");
 console.log(JSON.stringify(report));
 console.log("REPORT_JSON_END");
