@@ -91,9 +91,9 @@ if (theme)
     .sort((a, b) => a.brand.localeCompare(b.brand) || a.date.localeCompare(b.date))
     .map((r) => ({ brand: r.brand, platform: r.platform, date: r.date, format: r.format, interactions: r.interactions, url: r.url, text: r.text.slice(0, 200) }));
 if (process.env.SEARCH && process.env.PLATFORM && process.env.SEARCH === "ALL") {
-  report.dump = rows.filter((r) => process.env.PLATFORM === "all" || r.platform === process.env.PLATFORM)
+  report.dump = rows.filter((r) => (process.env.PLATFORM === "full" ? r.brand === "Resonia" : process.env.PLATFORM === "all" || r.platform === process.env.PLATFORM))
     .sort((a, b) => a.brand.localeCompare(b.brand) || a.date.localeCompare(b.date))
-    .map((r) => ({ b: r.brand, d: r.date, f: r.format, t: r.theme, i: r.interactions, x: r.text.slice(0, 600), u: r.url, p: r.platform }));
+    .map((r) => ({ b: r.brand, d: r.date, f: r.format, t: r.theme, i: r.interactions, x: process.env.PLATFORM === "full" ? r.text : r.text.slice(0, 600), u: r.url, p: r.platform }));
 } else if (process.env.SEARCH) {
   const re = new RegExp(process.env.SEARCH, "i");
   report.search = rows
