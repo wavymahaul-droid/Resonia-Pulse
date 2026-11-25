@@ -87,6 +87,13 @@ if (theme)
     .filter((r) => (r.theme || "Other") === theme && (!process.env.PLATFORM || r.platform === process.env.PLATFORM))
     .sort((a, b) => a.brand.localeCompare(b.brand) || a.date.localeCompare(b.date))
     .map((r) => ({ brand: r.brand, platform: r.platform, date: r.date, format: r.format, interactions: r.interactions, url: r.url, text: r.text.slice(0, 200) }));
+if (process.env.SEARCH) {
+  const re = new RegExp(process.env.SEARCH, "i");
+  report.search = rows
+    .filter((r) => re.test(r.text))
+    .sort((a, b) => a.brand.localeCompare(b.brand) || a.date.localeCompare(b.date))
+    .map((r) => ({ brand: r.brand, platform: r.platform, date: r.date, format: r.format, interactions: r.interactions, url: r.url, match: (r.text.match(re) || [""])[0], text: r.text.slice(0, 140) }));
+}
 console.log("REPORT_JSON_START");
 console.log(JSON.stringify(report));
 console.log("REPORT_JSON_END");
