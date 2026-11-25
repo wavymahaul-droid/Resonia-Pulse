@@ -28,7 +28,8 @@ async function api(path, init = {}) {
   return JSON.parse(body);
 }
 
-for (const [actor, input, fields] of RUNS) {
+const ONLY = process.env.ONLY ?? "";
+for (const [actor, input, fields] of RUNS.filter(([a]) => !ONLY || a.includes(ONLY))) {
   process.stdout.write(`\n== ${actor}\n`);
   try {
     let r = (await api(`/acts/${actor}/runs?timeout=180&waitForFinish=60&maxTotalChargeUsd=${CAP_USD}&maxItems=5`, { method: "POST", body: JSON.stringify(input) })).data;
@@ -37,6 +38,11 @@ for (const [actor, input, fields] of RUNS) {
     await new Promise((s) => setTimeout(s, 4000));
     r = (await api(`/actor-runs/${r.id}`)).data;
     console.log(`  ${r.status}, ${items.length} items, $${(r.usageTotalUsd ?? 0).toFixed(4)}`);
+    if (r.status !== "SUCCEEDED") {
+      console.log(`  status message: ${r.statusMessage ?? "-"}`);
+      const log = await fetch(`${API}/actor-runs/${r.id}/log`, { headers: { Authorization: `Bearer ${TOKEN}` } }).then((x) => x.text());
+      console.log(log.split("\n").slice(-25).map((l) => "  | " + l.slice(0, 200)).join("\n"));
+    }
     const first = items[0] ?? {};
     for (const f of fields) console.log(`  ${f in first ? "ok     " : "MISSING"} ${f}: ${JSON.stringify(first[f])?.slice(0, 90)}`);
   } catch (err) {
