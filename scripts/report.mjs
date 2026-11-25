@@ -93,7 +93,7 @@ if (theme)
 if (process.env.SEARCH && process.env.PLATFORM && process.env.SEARCH === "ALL") {
   report.dump = rows.filter((r) => r.platform === process.env.PLATFORM)
     .sort((a, b) => a.brand.localeCompare(b.brand) || a.date.localeCompare(b.date))
-    .map((r) => ({ b: r.brand, d: r.date, f: r.format, t: r.theme, i: r.interactions, x: r.text.slice(0, 600) }));
+    .map((r) => ({ b: r.brand, d: r.date, f: r.format, t: r.theme, i: r.interactions, x: r.text.slice(0, 600), u: r.url }));
 } else if (process.env.SEARCH) {
   const re = new RegExp(process.env.SEARCH, "i");
   report.search = rows
