@@ -1,0 +1,24 @@
+# Actions tab > "5. Data report" > Run workflow. Read-only: prints top posts, hashtags and
+# chosen hashtags' posts as JSON in the log, for analysis outside the dashboard.
+name: 5. Data report
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: "Hashtags to list posts for, comma-separated (e.g. #mission0123)"
+        type: string
+        default: ""
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/report.mjs
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          TAGS: ${{ inputs.tags }}
