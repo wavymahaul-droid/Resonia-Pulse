@@ -1,0 +1,43 @@
+# Actions tab > "2. Backfill six months" > Run workflow.
+# Leave "Fetch and save" unticked first: the log then shows the pages, limits and worst-case cost,
+# and spends nothing. Tick it to fetch and save. "Platforms" limits the run, e.g. linkedin,x,instagram
+# now and facebook after the Apify billing cycle resets. Needs the APIFY_TOKEN, SUPABASE_URL and
+# SUPABASE_SERVICE_KEY secrets.
+name: 2. Backfill six months
+on:
+  workflow_dispatch:
+    inputs:
+      go:
+        description: "Fetch and save (untick for a free cost estimate)"
+        type: boolean
+        default: false
+      platforms:
+        description: "Platforms, comma-separated, no spaces (blank = all four)"
+        type: string
+        default: "linkedin,x,instagram"
+      since:
+        description: "First day to collect (YYYY-MM-DD)"
+        type: string
+        default: "2026-05-24"
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Backfill
+        run: |
+          ARGS="${{ inputs.since }}"
+          if [ "${{ inputs.go }}" = "true" ]; then ARGS="$ARGS --go"; fi
+          if [ -n "${{ inputs.platforms }}" ]; then ARGS="$ARGS --only ${{ inputs.platforms }}"; fi
+          npx tsx scripts/backfill.ts $ARGS
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          APIFY_MONTHLY_BUDGET_USD: "4.9"

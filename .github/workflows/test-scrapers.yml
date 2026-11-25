@@ -1,0 +1,18 @@
+# Actions tab > "1. Test scrapers" > Run workflow.
+# Runs each Instagram, Facebook and X scraper on one POWERGRID page with 3 posts (a few cents).
+# Every field in the log should say "ok". Needs the APIFY_TOKEN secret.
+name: 1. Test scrapers
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/test-platform-actors.mjs
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
