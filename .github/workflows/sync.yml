@@ -20,4 +20,4 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          APIFY_MONTHLY_BUDGET_USD: "4.9"
+          APIFY_MONTHLY_BUDGET_USD: "9"

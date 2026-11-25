@@ -14,7 +14,7 @@ on:
       platforms:
         description: "Platforms, comma-separated, no spaces (blank = all four)"
         type: string
-        default: "linkedin,x,instagram"
+        default: ""
       since:
         description: "First day to collect (YYYY-MM-DD)"
         type: string
@@ -40,4 +40,4 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          APIFY_MONTHLY_BUDGET_USD: "4.9"
+          APIFY_MONTHLY_BUDGET_USD: "9"
